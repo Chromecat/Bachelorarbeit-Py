@@ -6,29 +6,29 @@ import xlsxwriter
 
 inputaudio = read("audio.wav")  # lesen des WAV-files
 
-audio = np.array(inputaudio[1], dtype=float)  # inputaudio in array audio transformieren
+audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
 f, t, Sxx = signal.spectrogram(audio)  # spektrogramm bilden
 
-print(Sxx.shape)
-print(Sxx.dtype)
+#print(Sxx.shape)
+#print(Sxx.dtype)
 
 matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # ndarray erstellen matrix[t,f] vgl Sxx[f,t]
 
-print(matrix.shape)
-print(matrix.dtype)
+#print(matrix.shape)
+#print(matrix.dtype)
 
 maxwert = np.ndarray(shape=(t.size,), dtype=float)  # ndarray erstellen maxwert
 
-print(maxwert.shape)
-print(maxwert.dtype)
+#print(maxwert.shape)
+#print(maxwert.dtype)
 
-for t0 in range(0, t.size):
+for t0 in range(0, t.size):  # erste itteration arrays mit 0 fuellen
     maxwert[t0] = 0
     for f0 in range(0, f.size):
         matrix[t0, f0] = 0
 
-for t1 in range(0, t.size):  # schleife um maxwert zu bestimmen
+for t1 in range(0, t.size):  # zweite itteration um maxwert zu bestimmen
 
     a = 0
 
@@ -41,7 +41,7 @@ for t1 in range(0, t.size):  # schleife um maxwert zu bestimmen
 #    print (n1)
 
 
-for t2 in range(0, t.size):  # uebertrag matrix mit division des maxwert (wertebereich 0-1)
+for t2 in range(0, t.size):  # dritte itteration mit uebertrag und normierung auf wertebereich (0-1)
     for f2 in range(0, f.size):
         x1 = Sxx[f2, t2]
         x2 = maxwert[t2]
@@ -53,18 +53,11 @@ for t2 in range(0, t.size):  # uebertrag matrix mit division des maxwert (werteb
         print(matrix[t2, f2].round(4))
 
 
-#np.savetxt('test.txt', matrix, fmt='%1.3f')
-
-# Create an new Excel file and add a worksheet.
-workbook = xlsxwriter.Workbook('demo.xlsx')
+workbook = xlsxwriter.Workbook('demo.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
-
-# Write some numbers, with row/column notation.
-worksheet.write(3, 0, 123.456)
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
         worksheet.write(f3, t3, matrix[t3, f3])
-
 workbook.close()
 
 """
