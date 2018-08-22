@@ -70,16 +70,54 @@ workbook.close()
 """
 bereich bestimmung der laute 
 
-for n3 in range(0, t.size): # bestimmung des H lautes
-    for m3 in range(0, f.size):  # analog array bauen zum vergleich
-        print("n3")
+s0 = np.ndarray(shape=(6), dtype=float) #schnittarray 1. wert anfang 2. wert stop usw.
 
-for n4 in range(0, t.size):  # bestimmung des S lautes
-    for m4 in range(0, f.size):
-        print("n4")
+a3 = np.ndarray(shape=(x), dtype=int)   # array erstellung 
+a3[0] = 2342                            # erster wert = summe
+a3[1] = 1                               # welche arrayelemente summiert werden sollen
+a3[2] = 2
+a3[3] = 3
+a3[4] = 4
+a3[5] = 5
+a3[6] = 6
+a3[7] = 7
+a3[8] = 8
+a3[9] = 9
 
-for n5 in range(0, t.size):  # bestimmung des D lautes
-    for m5 in range(0, f.size):
-        print("n5")
+for t3 in range(0, t.size): # bestimmung des H lautes
+    for f3 in range(0, f.size):
+        print("t3")
+        
+a4 = np.ndarray(shape=(x), dtype=int)   # array erstellung 
+a4[0] = 2342                            # erster wert = summe
+a4[1] = 1                               # welche arrayelemente summiert werden sollen
+a4[2] = 2
+a4[3] = 3
+a4[4] = 4
+a4[5] = 5
+a4[6] = 6
+a4[7] = 7
+a4[8] = 8
+a4[9] = 9
+
+for t4 in range(0, t.size):  # bestimmung des S lautes
+    for f4 in range(0, f.size):
+        print("t4")
+        
+a5 = np.ndarray(shape=(x), dtype=int)   # array erstellung 
+a5[0] = 2342                            # erster wert = summe
+a5[1] = 1                               # welche arrayelemente summiert werden sollen
+a5[2] = 2
+a5[3] = 3
+a5[4] = 4
+a5[5] = 5
+a5[6] = 6
+a5[7] = 7
+a5[8] = 8
+a5[9] = 9
+
+for t5 in range(0, t.size):  # bestimmung des D lautes
+    for f5 in range(0, f.size):
+        print("t5")
         
 """
