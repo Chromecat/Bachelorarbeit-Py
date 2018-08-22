@@ -53,8 +53,7 @@ for t2 in range(0, t.size):  # uebertrag matrix mit division des maxwert (werteb
 
 
 """
-n = t 
-m = f 
+bereich bestimmung der laute 
 
 for n3 in range(0, t.size): # bestimmung des H lautes
     for m3 in range(0, f.size):  # analog array bauen zum vergleich
