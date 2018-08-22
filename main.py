@@ -62,4 +62,6 @@ for n4 in range(0, t.size):  # bestimmung des S lautes
 
 for n5 in range(0, t.size):  # bestimmung des D lautes
     for m5 in range(0, f.size):
-        print("n5")"""
+        print("n5")
+        
+"""
