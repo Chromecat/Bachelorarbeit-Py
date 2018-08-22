@@ -2,6 +2,7 @@ from pydub import AudioSegment
 from scipy.io.wavfile import read
 from scipy import signal
 import numpy as np
+import xlsxwriter
 
 inputaudio = read("audio.wav")  # lesen des WAV-files
 
@@ -51,6 +52,20 @@ for t2 in range(0, t.size):  # uebertrag matrix mit division des maxwert (werteb
 
         print(matrix[t2, f2].round(4))
 
+
+#np.savetxt('test.txt', matrix, fmt='%1.3f')
+
+# Create an new Excel file and add a worksheet.
+workbook = xlsxwriter.Workbook('demo.xlsx')
+worksheet = workbook.add_worksheet()
+
+# Write some numbers, with row/column notation.
+worksheet.write(3, 0, 123.456)
+for t3 in range(0, t.size):
+    for f3 in range(0, f.size):
+        worksheet.write(f3, t3, matrix[t3, f3])
+
+workbook.close()
 
 """
 bereich bestimmung der laute 
