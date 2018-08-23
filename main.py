@@ -10,13 +10,16 @@ audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio tran
 
 f, t, Sxx = signal.spectrogram(audio)  # spektrogramm bilden
 
+print(f*100000)
+
+
 #print(Sxx.shape)
 #print(Sxx.dtype)
 
 matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # ndarray erstellen matrix[t,f] vgl Sxx[f,t]
 
-#print(matrix.shape)
-#print(matrix.dtype)
+print(matrix.shape)
+print(matrix.dtype)
 
 maxwert = np.ndarray(shape=(t.size,), dtype=float)  # ndarray erstellen maxwert
 
@@ -50,14 +53,14 @@ for t2 in range(0, t.size):  # dritte itteration mit uebertrag und normierung au
         else:
             matrix[t2, f2] = x1 / x2
 
-        print(matrix[t2, f2].round(4))
+#        print(matrix[t2, f2].round(4))
 
 
 workbook = xlsxwriter.Workbook('demo.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
-        worksheet.write(f3, t3, matrix[t3, f3])
+        worksheet.write((f.size - f3), t3, matrix[t3, f3])
 workbook.close()
 
 """
