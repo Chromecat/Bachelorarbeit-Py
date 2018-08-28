@@ -4,7 +4,7 @@ from scipy import signal
 import numpy as np
 import xlsxwriter
 
-inputaudio = read("audio.wav")  # lesen des WAV-files
+inputaudio = read("audio2.wav")  # lesen des WAV-files
 
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
@@ -57,7 +57,7 @@ for t2 in range(0, t.size):  # dritte itteration mit uebertrag und normierung au
 #        print(matrix[t2, f2].round(4))
 
 
-workbook = xlsxwriter.Workbook('demo.xlsx')  # in excel schreiben
+workbook = xlsxwriter.Workbook('audio2.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
