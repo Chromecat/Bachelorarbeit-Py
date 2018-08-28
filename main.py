@@ -3,12 +3,13 @@ from scipy.io.wavfile import read
 from scipy import signal
 import numpy as np
 import xlsxwriter
+from scipy.signal import get_window
 
 inputaudio = read("audio.wav")  # lesen des WAV-files
 
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
-f, t, Sxx = signal.spectrogram(audio, fs=0.44)  # spektrogramm bilden
+f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), nperseg=1000)  # spektrogramm bilden
 
 print(f*100000)
 #print(t)
