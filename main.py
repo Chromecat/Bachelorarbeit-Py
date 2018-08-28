@@ -9,7 +9,8 @@ inputaudio = read("audio.wav")  # lesen des WAV-files
 
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
-f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), nperseg=1000)  # spektrogramm bilden
+#f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), nperseg=1000)  # spektrogramm bilden
+f, t, Sxx = signal.spectrogram(audio)
 
 print(f*100000)
 #print(t)
@@ -58,7 +59,7 @@ for t2 in range(0, t.size):  # dritte itteration mit uebertrag und normierung au
 #        print(matrix[t2, f2].round(4))
 
 
-workbook = xlsxwriter.Workbook('audio.xlsx')  # in excel schreiben
+workbook = xlsxwriter.Workbook('audio2.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
