@@ -4,15 +4,15 @@ from scipy import signal
 import numpy as np
 import xlsxwriter
 
-inputaudio = read("audio2.wav")  # lesen des WAV-files
+inputaudio = read("audio.wav")  # lesen des WAV-files
 
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
-f, t, Sxx = signal.spectrogram(audio)  # spektrogramm bilden
+f, t, Sxx = signal.spectrogram(audio, fs=0.44)  # spektrogramm bilden
 
-#print(f*100000)
-print(t)
-print(t.shape)
+print(f*100000)
+#print(t)
+#print(t.shape)
 
 #print(Sxx.shape)
 #print(Sxx.dtype)
@@ -57,7 +57,7 @@ for t2 in range(0, t.size):  # dritte itteration mit uebertrag und normierung au
 #        print(matrix[t2, f2].round(4))
 
 
-workbook = xlsxwriter.Workbook('audio2.xlsx')  # in excel schreiben
+workbook = xlsxwriter.Workbook('audio.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
@@ -117,4 +117,5 @@ for t5 in range(0, t.size):  # bestimmung des D lautes
     for f5 in range(0, f.size):
         print("t5")
         
+
 """
