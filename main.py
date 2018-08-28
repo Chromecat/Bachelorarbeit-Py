@@ -10,8 +10,9 @@ audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio tran
 
 f, t, Sxx = signal.spectrogram(audio)  # spektrogramm bilden
 
-print(f*100000)
-
+#print(f*100000)
+print(t)
+print(t.shape)
 
 #print(Sxx.shape)
 #print(Sxx.dtype)
