@@ -20,6 +20,7 @@ f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), noverl
 
 matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # ndarray erstellen matrix[t,f] vgl Sxx[f,t]
 maxwert = 0
+twert = np.ndarray(shape=(6,))
 
 print(matrix.shape)
 print(matrix.dtype)
@@ -109,5 +110,24 @@ for t5 in range(0, t.size):  # bestimmung des D lautes
     for f5 in range(0, f.size):
         print("t5")
         
+
+
+
+newaudio = AudioSegment.from_wav("audio.wav")
+
+silence = AudioSegment.silent(duration=250)
+
+t1 = newaudio[:twert[1]]
+firstslice = t1[(twert[1]-twert[0]):]
+
+t2 = newaudio[:twert[3]]
+secondslice = t1[(twert[3]-twert[2]):]
+
+t3 = newaudio[:twert[5]]
+thirddslice = t1[(twert[5]-twert[4]):]
+
+finalaudio = silence + firstslice + silence + secondslice + silence + thirddslice + silence
+
+finalaudio.export("Ausgabe.wav", format="wav")
 
 """
