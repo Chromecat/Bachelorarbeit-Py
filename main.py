@@ -5,7 +5,7 @@ import numpy as np
 import xlsxwriter
 from scipy.signal import get_window
 
-inputaudio = read("audio.wav")  # lesen des WAV-files
+inputaudio = read("audio4.wav")  # lesen des WAV-files
 
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
@@ -20,7 +20,7 @@ f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), noverl
 
 matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # ndarray erstellen matrix[t,f] vgl Sxx[f,t]
 maxwert = 0
-twert = np.ndarray(shape=(6,))
+twert = np.ndarray(shape=(6,), dtype=float)
 
 print(matrix.shape)
 print(matrix.dtype)
@@ -50,17 +50,17 @@ for t2 in range(0, t.size):  # itteration mit uebertrag und normierung auf werte
         else:
             matrix[t2, f2] = x1 / x2
 
-workbook = xlsxwriter.Workbook('Data.xlsx')  # in excel schreiben
+# """
+workbook = xlsxwriter.Workbook('audio4data.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
         worksheet.write((f.size - f3), t3, matrix[t3, f3])
 workbook.close()
+# """
 
 """
-bereich bestimmung der laute 
-
-s0 = np.ndarray(shape=(6), dtype=float) #schnittarray 1. wert anfang 2. wert stop usw.
+bereich bestimmung der laute a3 fuer t3
 
 a3 = np.ndarray(shape=(x), dtype=int)   # array erstellung 
 a3[0] = 2342                            # erster wert = summe
