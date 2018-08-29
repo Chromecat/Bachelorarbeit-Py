@@ -10,9 +10,8 @@ inputaudio = read("audio.wav")  # lesen des WAV-files
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
 f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), noverlap=500)  # spektrogramm bilden
-#f, t, Sxx = signal.spectrogram(audio)
 
-print(f*100000)
+#print(f*100000)
 #print(t)
 #print(t.shape)
 
@@ -20,46 +19,35 @@ print(f*100000)
 #print(Sxx.dtype)
 
 matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # ndarray erstellen matrix[t,f] vgl Sxx[f,t]
+maxwert = 0
 
 print(matrix.shape)
 print(matrix.dtype)
 
 #maxwert = np.ndarray(shape=(t.size,), dtype=float)  # ndarray erstellen maxwert
-a = 0
+
 
 #print(maxwert.shape)
 #print(maxwert.dtype)
 
-for t0 in range(0, t.size):  # erste itteration arrays mit 0 fuellen
-    #maxwert[t0] = 0
-    for f0 in range(0, f.size):
-        matrix[t0, f0] = 0
+#for t0 in range(0, t.size):  # erste itteration arrays mit 0 fuellen
+#    for f0 in range(0, f.size):
+#        matrix[t0, f0] = 0
 
-for t1 in range(0, t.size):  # zweite itteration um maxwert zu bestimmen
-
-    #a = 0
+for t1 in range(0, t.size):  # itteration um maxwert zu bestimmen
 
     for f1 in range(0, f.size):
-        if Sxx[f1, t1] > a:
-            a = Sxx[f1, t1]
-    #maxwert[t1] = a
+        if Sxx[f1, t1] > maxwert:
+            maxwert = Sxx[f1, t1]
 
-#    print (a)
-#    print (n1)
-
-
-for t2 in range(0, t.size):  # dritte itteration mit uebertrag und normierung auf wertebereich (0-1)
+for t2 in range(0, t.size):  # itteration mit uebertrag und normierung auf wertebereich (0-1)
     for f2 in range(0, f.size):
         x1 = Sxx[f2, t2]
-        #x2 = maxwert[t2]
-        x2 = a
+        x2 = maxwert
         if x2 == 0:
             matrix[t2, f2] = 0
         else:
             matrix[t2, f2] = x1 / x2
-
-#        print(matrix[t2, f2].round(4))
-
 
 workbook = xlsxwriter.Workbook('Data.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
