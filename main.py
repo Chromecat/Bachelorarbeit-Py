@@ -5,15 +5,15 @@ import numpy as np
 import xlsxwriter
 from scipy.signal import get_window
 
-inputaudio = read("audio4.wav")  # lesen des WAV-files
+inputaudio = read("audio1.wav")  # lesen des WAV-files
 
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
 f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), noverlap=500)  # spektrogramm bilden
 
 #print(f*100000)
-#print(t)
-#print(t.shape)
+print(t/100000)
+print(t.shape)
 
 #print(Sxx.shape)
 #print(Sxx.dtype)
@@ -50,14 +50,14 @@ for t2 in range(0, t.size):  # itteration mit uebertrag und normierung auf werte
         else:
             matrix[t2, f2] = x1 / x2
 
-# """
+"""
 workbook = xlsxwriter.Workbook('audio4data.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
         worksheet.write((f.size - f3), t3, matrix[t3, f3])
 workbook.close()
-# """
+"""
 
 """
 bereich bestimmung der laute a3 fuer t3
@@ -75,8 +75,13 @@ a3[8] = 8
 a3[9] = 9
 
 for t3 in range(0, t.size): # bestimmung des H lautes
-    for f3 in range(0, f.size):
-        print("t3")
+
+
+
+
+
+#    for f3 in range(0, f.size):
+#        print("t3")
         
 a4 = np.ndarray(shape=(x), dtype=int)   # array erstellung 
 a4[0] = 2342                            # erster wert = summe
@@ -91,8 +96,13 @@ a4[8] = 8
 a4[9] = 9
 
 for t4 in range(0, t.size):  # bestimmung des S lautes
-    for f4 in range(0, f.size):
-        print("t4")
+
+
+
+
+
+#    for f4 in range(0, f.size):
+#        print("t4")
         
 a5 = np.ndarray(shape=(x), dtype=int)   # array erstellung 
 a5[0] = 2342                            # erster wert = summe
@@ -107,8 +117,13 @@ a5[8] = 8
 a5[9] = 9
 
 for t5 in range(0, t.size):  # bestimmung des D lautes
-    for f5 in range(0, f.size):
-        print("t5")
+
+
+
+
+
+#    for f5 in range(0, f.size):
+#        print("t5")
         
 
 
