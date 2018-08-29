@@ -118,13 +118,13 @@ newaudio = AudioSegment.from_wav("audio.wav")
 silence = AudioSegment.silent(duration=250)
 
 t1 = newaudio[:twert[1]]
-firstslice = t1[(twert[1]-twert[0]):]
+firstslice = t1[-(twert[1]-twert[0]):]
 
 t2 = newaudio[:twert[3]]
-secondslice = t1[(twert[3]-twert[2]):]
+secondslice = t1[-(twert[3]-twert[2]):]
 
 t3 = newaudio[:twert[5]]
-thirddslice = t1[(twert[5]-twert[4]):]
+thirddslice = t1[-(twert[5]-twert[4]):]
 
 finalaudio = silence + firstslice + silence + secondslice + silence + thirddslice + silence
 
