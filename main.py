@@ -24,24 +24,25 @@ matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # ndarray e
 print(matrix.shape)
 print(matrix.dtype)
 
-maxwert = np.ndarray(shape=(t.size,), dtype=float)  # ndarray erstellen maxwert
+#maxwert = np.ndarray(shape=(t.size,), dtype=float)  # ndarray erstellen maxwert
+a = 0
 
 #print(maxwert.shape)
 #print(maxwert.dtype)
 
 for t0 in range(0, t.size):  # erste itteration arrays mit 0 fuellen
-    maxwert[t0] = 0
+    #maxwert[t0] = 0
     for f0 in range(0, f.size):
         matrix[t0, f0] = 0
 
 for t1 in range(0, t.size):  # zweite itteration um maxwert zu bestimmen
 
-    a = 0
+    #a = 0
 
     for f1 in range(0, f.size):
         if Sxx[f1, t1] > a:
             a = Sxx[f1, t1]
-    maxwert[t1] = a
+    #maxwert[t1] = a
 
 #    print (a)
 #    print (n1)
@@ -50,7 +51,8 @@ for t1 in range(0, t.size):  # zweite itteration um maxwert zu bestimmen
 for t2 in range(0, t.size):  # dritte itteration mit uebertrag und normierung auf wertebereich (0-1)
     for f2 in range(0, f.size):
         x1 = Sxx[f2, t2]
-        x2 = maxwert[t2]
+        #x2 = maxwert[t2]
+        x2 = a
         if x2 == 0:
             matrix[t2, f2] = 0
         else:
