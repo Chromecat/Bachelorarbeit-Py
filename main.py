@@ -59,25 +59,37 @@ for t3 in range(0, t.size):
 workbook.close()
 """
 
+
+# bereich bestimmung der laute a3 fuer t3
+a3size = 100
+
+a3 = np.ndarray(shape=(a3size + 2,), dtype=int)   # array erstellung muss die groesse besitze
+
+x3 = 0
+for r3 in range(0, a3size + 1):    # hier berreich des filters bauen
+
+    a3[r3+1] = x3 + 100
+    x3 = x3 + 1
+
+    print (a3)
+
+a3[0] = 324
+
+for t3 in range(0, t.size):  # bestimmung des H lautes
+    s3 = 0
+    for aa3 in range(0, a3.size):
+        s3 = s3 + matrix[t3, a3[aa3]]
+    
+    if s3 >= a3[0]:
+        twert[0] = t3
+        break
+
+if twert[0] > 0:
+    print ("twert")
+    print (twert[0])
+
+
 """
-bereich bestimmung der laute a3 fuer t3
-
-a3 = np.ndarray(shape=(x), dtype=int)   # array erstellung 
-a3[0] = 2342                            # erster wert = summe
-a3[1] = 1                               # welche arrayelemente summiert werden sollen
-a3[2] = 2
-a3[3] = 3
-a3[4] = 4
-a3[5] = 5
-a3[6] = 6
-a3[7] = 7
-a3[8] = 8
-a3[9] = 9
-
-for t3 in range(0, t.size): # bestimmung des H lautes
-
-
-
 
 
 #    for f3 in range(0, f.size):
