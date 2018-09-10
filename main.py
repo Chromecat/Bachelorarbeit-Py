@@ -102,7 +102,14 @@ workbook.close()
 
 h()
 
-"""
+twert[0] = 0
+twert[1] = 0
+twert[2] = 0
+twert[3] = 0
+twert[4] = 0
+twert[5] = 0
+
+
 
 newaudio = AudioSegment.from_wav("audio1.wav")
 
@@ -120,5 +127,3 @@ thirddslice = t1[-(twert[5]-twert[4]):]
 finalaudio = silence + firstslice + silence + secondslice + silence + thirddslice + silence
 
 finalaudio.export("Ausgabe.wav", format="wav")
-
-"""
