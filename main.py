@@ -6,7 +6,7 @@ import xlsxwriter
 from scipy.signal import get_window
 
 
-def h():
+def trigger():
 
     # bereich bestimmung der laute a3 fuer t3
     a3size = 100
@@ -53,7 +53,7 @@ audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio tran
 f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), noverlap=500)  # spektrogramm bilden
 
 #print(f*100000)
-print(t/100000)  # in sec
+print(t/100)  # in ms
 print(t.shape)  # size
 
 #print(Sxx.shape)
@@ -91,16 +91,15 @@ for t2 in range(0, t.size):  # itteration mit uebertrag und normierung auf werte
         else:
             matrix[t2, f2] = x1 / x2
 
-"""
+
 workbook = xlsxwriter.Workbook('audio4data.xlsx')  # in excel schreiben
 worksheet = workbook.add_worksheet()
 for t3 in range(0, t.size):
     for f3 in range(0, f.size):
         worksheet.write((f.size - f3), t3, matrix[t3, f3])
 workbook.close()
-"""
 
-h()
+trigger()
 
 twert[0] = 0
 twert[1] = 0
