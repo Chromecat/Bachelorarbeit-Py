@@ -34,26 +34,24 @@ def trigger1():  # def a filter detecting an [ha] sound
             a3true = 1
             x3 = 0
             for r3 in range(0, a3size + 1):
-                a3[r3 + 1] = x3 + 100  # filter from 0 + 100 to 200 (a3size = 100)
+                a3[r3 + 1] = x3 + 100  # filter from 0 + 100 to 200 (b3size = 100)
                 x3 = x3 + 1
 
             a3[0] = 324  # Value to exceed
 
-            for t3 in range(0, t.size):  # iterrativ detection of sound
-                s3 = 0
-                for aa3 in range(1, a3.size):  # itterativ ueber alle elemente des array ausser 0
-                    s3 += matrix[t3, a3[aa3]]  # summation of values
+            for t33 in range(0, t.size):  # iterrativ detection of sound
+                s33 = 0
+                for bb33 in range(1, b3.size):  # itterativ ueber alle elemente des array ausser 0
+                    s33 += matrix[t3, b3[bb33]]  # summation of values
 
-                if s3 >= a3[0]:  # case of detection
-                    a3true = 1
+                if s33 >= b3[0]:  # case of detection
+                    b3true = 1
                     break
             break
 
-
-
     if a3true > 0 and b3true > 0:
         twert[0] = t3
-    return
+    return twert[0]
 
 
 inputaudio = read("audio.wav")  # lesen des WAV-files
@@ -62,29 +60,15 @@ audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio tran
 
 f, t, Sxx = signal.spectrogram(audio, window=get_window('hamming', 1000), noverlap=500)  # spektrogramm bilden
 
-#print(f*100000)
-print(t/100)  # in ms
-print(t.shape)  # size
+print(t/100)  # printing timesteps in ms
+print(t.shape)  # number of timesteps
 
-#print(Sxx.shape)
-#print(Sxx.dtype)
 
-matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # ndarray erstellen matrix[t,f] vgl Sxx[f,t]
+matrix = np.ndarray(shape=(t.size, f.size), dtype=float, order='F')  # generating horizontal t and vertical f array
 maxwert = 0
 twert = np.ndarray(shape=(6,), dtype=float)
 
-print(matrix.shape)
-print(matrix.dtype)
-
-#maxwert = np.ndarray(shape=(t.size,), dtype=float)  # ndarray erstellen maxwert
-
-
-#print(maxwert.shape)
-#print(maxwert.dtype)
-
-#for t0 in range(0, t.size):  # erste itteration arrays mit 0 fuellen
-#    for f0 in range(0, f.size):
-#        matrix[t0, f0] = 0
+#print(matrix.shape)
 
 for t1 in range(0, t.size):  # itteration um maxwert zu bestimmen
 
