@@ -5,12 +5,14 @@ import numpy as np  # numpy as options for complex arrays
 import xlsxwriter  # exporting excel files
 from scipy.signal import get_window  # differen windows for fourier transformation
 
+sound = "audio1.wav"
+
 
 def trigger1():  # def a filter detecting an [ha] sound
 
     filtersize = 20
-    correctiontime = -15
-    duration = 200
+    correctiontime = 0  # -15
+    duration = 400
 
     boolean = 0
 
@@ -41,7 +43,7 @@ def trigger1():  # def a filter detecting an [ha] sound
     return twert[0]
 
 
-inputaudio = read("audio.wav")  # lesen des WAV-files
+inputaudio = read(sound)  # lesen des WAV-files
 
 audio = np.array(inputaudio[1], dtype=float)  # inputaudio in ndarray audio transformieren
 
@@ -74,26 +76,26 @@ for t2 in range(0, t.size):  # itteration mit uebertrag und normierung auf werte
 
 # end spectrogram converting
 
-workbook = xlsxwriter.Workbook('audiodata.xlsx')  # export excel file
+"""workbook = xlsxwriter.Workbook('audiodata.xlsx')  # export excel file
 worksheet = workbook.add_worksheet()
 for t4 in range(0, t.size):
     for f4 in range(0, f.size):
         worksheet.write((f.size - f4), t4, matrix[t4, f4])
-workbook.close()
+workbook.close()"""
 
 # end excel export
 
 # setting t values to 0
 twert[0] = 0
 twert[1] = 0
-twert[2] = 500
-twert[3] = 700
+twert[2] = 0  # 500
+twert[3] = 0  # 700
 twert[4] = 0
 twert[5] = 0
 
 trigger1()  # calling function to detect sound [ha]
 
-newaudio = AudioSegment.from_wav("audio.wav")  # reread audiofile
+newaudio = AudioSegment.from_wav(sound)  # reread audiofile
 
 silence = AudioSegment.silent(duration=250)  # silence between audiosamples/slices
 
