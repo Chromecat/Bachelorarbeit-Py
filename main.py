@@ -8,49 +8,36 @@ from scipy.signal import get_window  # differen windows for fourier transformati
 
 def trigger1():  # def a filter detecting an [ha] sound
 
-    a3size = 100
-    b3size = 100
+    filtersize = 20
+    correctiontime = -15
+    duration = 200
 
-    a3true = 0
-    b3true = 0
+    boolean = 0
 
-    a3 = np.ndarray(shape=(a3size + 2,), dtype=int)   # array erstellung
-    b3 = np.ndarray(shape=(b3size + 2,), dtype=int)   # array erstellung
+    filterarray = np.ndarray(shape=(filtersize + 2,), dtype=int)   # array erstellung
 
-    x3 = 0
-    for r3 in range(0, a3size + 1):
+    offset = 0
+    for runtimefillingarray in range(0, filtersize + 1):
 
-        a3[r3+1] = x3 + 100      # filter from 0 + 100 to 200 (a3size = 100)
-        x3 = x3 + 1
+        filterarray[runtimefillingarray+1] = offset
+        offset = offset + 1
 
-    a3[0] = 324  # Value to exceed
+    filterarray[0] = 2  # Value to exceed
 
-    for t3 in range(0, t.size):  # iterrativ detection of sound
-        s3 = 0
-        for aa3 in range(1, a3.size):   # itterativ ueber alle elemente des array ausser 0
-            s3 += matrix[t3, a3[aa3]]  # summation of values
+    for runtimetime in range(0, t.size):  # iterrativ detection of sound
+        summoffrequencys = 0
+        for runtimefilterarray in range(1, filterarray.size):   # itterativ ueber alle elemente des array ausser 0
+            summoffrequencys += matrix[runtimetime, filterarray[runtimefilterarray]]  # summation of values
 
-        if s3 >= a3[0]:  # case of detection
-            a3true = 1
-            x3 = 0
-            for r3 in range(0, a3size + 1):
-                a3[r3 + 1] = x3 + 100  # filter from 0 + 100 to 200 (b3size = 100)
-                x3 = x3 + 1
-
-            a3[0] = 324  # Value to exceed
-
-            for t33 in range(0, t.size):  # iterrativ detection of sound
-                s33 = 0
-                for bb33 in range(1, b3.size):  # itterativ ueber alle elemente des array ausser 0
-                    s33 += matrix[t3, b3[bb33]]  # summation of values
-
-                if s33 >= b3[0]:  # case of detection
-                    b3true = 1
-                    break
+        if summoffrequencys >= filterarray[0]:  # case of detection
+            boolean = 1
+            print(summoffrequencys)
+            print(runtimetime)
             break
 
-    if a3true > 0 and b3true > 0:
-        twert[0] = t3
+    if boolean > 0:
+        twert[0] = (runtimetime + correctiontime) * 5
+        twert[1] = twert[0] + duration
     return twert[0]
 
 
@@ -85,6 +72,7 @@ for t2 in range(0, t.size):  # itteration mit uebertrag und normierung auf werte
         else:
             matrix[t2, f2] = x1 / x2
 
+# end spectrogram converting
 
 workbook = xlsxwriter.Workbook('audiodata.xlsx')  # export excel file
 worksheet = workbook.add_worksheet()
@@ -93,15 +81,17 @@ for t4 in range(0, t.size):
         worksheet.write((f.size - f4), t4, matrix[t4, f4])
 workbook.close()
 
-trigger1()  # calling function to detect sound [ha]
+# end excel export
 
 # setting t values to 0
 twert[0] = 0
 twert[1] = 0
-twert[2] = 0
-twert[3] = 0
+twert[2] = 500
+twert[3] = 700
 twert[4] = 0
 twert[5] = 0
+
+trigger1()  # calling function to detect sound [ha]
 
 newaudio = AudioSegment.from_wav("audio.wav")  # reread audiofile
 
@@ -119,4 +109,4 @@ thirddslice = tt3[-(twert[5]-twert[4]):]
 
 finalaudio = silence + firstslice + silence + secondslice + silence + thirddslice + silence  # arange slices
 
-finalaudio.export("Ausgabe.wav", format="wav")  # export wav file
+finalaudio.export("output.wav", format="wav")  # export wav file
