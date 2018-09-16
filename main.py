@@ -5,14 +5,14 @@ import numpy as np  # numpy as options for complex arrays
 import xlsxwriter  # exporting excel files
 from scipy.signal import get_window  # differen windows for fourier transformation
 
-sound = "audio1.wav"
+sound = "audio.wav"
 
 
 def trigger1():  # def a filter detecting an [ha] sound
 
     filtersize = 20
-    correctiontime = 0  # -15
-    duration = 400
+    correctiontime = -15
+    duration = 300
 
     boolean = 0
 
