@@ -12,7 +12,7 @@ def trigger1():  # def a filter detecting an [ha] sound
 
     filtersize = 20
     correctiontime = -15
-    duration = 300
+    duration = 200
 
     boolean = 0
 
@@ -88,8 +88,8 @@ workbook.close()"""
 # setting t values to 0
 twert[0] = 0
 twert[1] = 0
-twert[2] = 0  # 500
-twert[3] = 0  # 700
+twert[2] = 500
+twert[3] = 700
 twert[4] = 0
 twert[5] = 0
 
@@ -109,6 +109,6 @@ secondslice = tt2[-(twert[3]-twert[2]):]
 tt3 = newaudio[:twert[5]]
 thirddslice = tt3[-(twert[5]-twert[4]):]
 
-finalaudio = silence + firstslice + silence + secondslice + silence + thirddslice + silence  # arange slices
+finalaudio = silence + firstslice + silence + firstslice + silence + firstslice + silence  # arange slices
 
-finalaudio.export("output.wav", format="wav")  # export wav file
+finalaudio.export("Probandoutput.wav", format="wav")  # export wav file
